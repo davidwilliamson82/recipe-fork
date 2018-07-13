@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const keys = require('./config/keys')
+const bodyParser = require('body-parser')
+const passport = require('passport')
 
 const auth = require('./routes/api/auth.js')
 const profile = require('./routes/api/profile.js')
@@ -16,9 +18,12 @@ mongoose.connect(db, { useNewUrlParser: true })
 	       .catch(err => console.log(err))
 
 
-app.get('/', (req, res) => {
-  res.json({ msg: 'hooray!' })
-})
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+require('./config/passport')(passport);
+
+app.use('/auth', auth)
 
 const port = process.env.PORT || 5000
 
