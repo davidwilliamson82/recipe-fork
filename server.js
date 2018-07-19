@@ -17,13 +17,15 @@ mongoose.connect(db, { useNewUrlParser: true })
 	       .then(() => console.log('Connected to MongoDB'))
 	       .catch(err => console.log(err))
 
+app.use(passport.initialize())
+require('./config/passport')(passport)
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-//require('./config/passport')(passport)
-
-app.use('/auth', auth)
+app.use('/api/auth', auth)
+app.use('/api/profile', profile)
 
 const port = process.env.PORT || 5000
 
