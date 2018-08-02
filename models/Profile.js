@@ -22,9 +22,12 @@ const ProfileSchema = new Schema({
   recipes: {
     type: [String]
   },
-  following: {
-    type: [String]
-  }
+  following: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'auths'
+    }
+  ]
 })
 
 module.exports = Profile = mongoose.model('profiles', ProfileSchema)

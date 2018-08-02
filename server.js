@@ -26,6 +26,8 @@ app.use(bodyParser.json())
 
 app.use('/api/auth', auth)
 app.use('/api/profile', profile)
+app.use('/api/recipe', recipe)
+app.use('/api/comment', comment)
 
 const port = process.env.PORT || 5000
 
